@@ -2,8 +2,7 @@ const conexion = require("../database/database");
 const { deleteFacture, createFacture, getFacture } = require("../models/factureModel");
 
 const getFactures = (req, res) => {
-  const { uid } = req.body;
-  console.log(uid);
+  const { uid } = req;
   getFacture(conexion, uid, (err, facture) => {
     if (err) {
       console.log(err);
@@ -16,7 +15,8 @@ const getFactures = (req, res) => {
 };
 
 const createFactures = (req, res) => {
-  const { uid,sid,description} = req.body;
+  const { uid} = req;
+  const {sid,description} = req.body;
   const date = new Date();
   createFacture(conexion,uid,sid,description,date,(err) => {
     if (err) {
@@ -35,7 +35,6 @@ const createFactures = (req, res) => {
 
 const deletedFactures = (req, res) => {
   const { id } = req.params;
-  console.log(id);
   deleteFacture(conexion, id, (err) => {
     if (err) {
       console.error(err);

@@ -2,7 +2,7 @@ const conexion = require("../database/database");
 const { createCategory, getCategory, updateCategory, deleteCategory } = require("../models/categoryModel");
 
 const getCategories = (req, res) => {
-  const { uid } = req.body;
+  const { uid } = req;
   console.log(uid);
   getCategory(conexion, uid, (err, category) => {
     if (err) {
@@ -16,7 +16,8 @@ const getCategories = (req, res) => {
 };
 
 const createCategories = (req, res) => {
-  const { uid, name } = req.body;
+  const {uid} = req;
+  const {name } = req.body;
   createCategory(conexion, uid, name, (err) => {
     if (err) {
       console.error(err);

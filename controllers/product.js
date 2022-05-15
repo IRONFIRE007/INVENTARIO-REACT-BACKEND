@@ -4,10 +4,9 @@ const { getProduct, createProduct,deleteProduct, updateProduct} = require("../mo
 
 
 const getProducts = (req, res) => {
- const {uid} =  req.body;
+ const {uid} =  req;
     getProduct(conexion,uid,(err,products)=>{
      if(err){ console.log(err); return res.status(401).json({ok:true,msg:'Error get Clients'})}else{
-         console.log(products);
          res.status(200).json({ok:true,products});
      }
     })
@@ -15,10 +14,9 @@ const getProducts = (req, res) => {
 
 
 const createProducts = (req, res) => {
-        const {uid,sid,cid,name,description,priceBuy,priceSale,amount} = req.body;
-         console.log(uid,sid,cid,name,description,priceBuy,priceSale,amount);
-
-         createProduct(conexion,uid,sid,cid,name,description,priceBuy,priceSale,amount,(err)=>{
+  const {uid} = req;
+        const {sid,cid,name,description,priceBuy,priceSale,amount} = req.body;
+  createProduct(conexion,uid,sid,cid,name,description,priceBuy,priceSale,amount,(err)=>{
             if (err) {
                 console.error(err);
               return res
@@ -34,7 +32,6 @@ const createProducts = (req, res) => {
 const updateProducts = (req, res) => {
     const {id} = req.params;
     const {sid,cid,name,description,priceBuy,priceSale,amount} = req.body;
-    console.log(req.body,id);
     updateProduct(conexion,sid,cid,name,description,priceBuy,priceSale,amount,id,(err)=>{
       if (err) {
         console.error(err);
@@ -51,7 +48,6 @@ const updateProducts = (req, res) => {
 
 const deleteProducts = (req, res) => {
     const {id}= req.params;
-    console.log(id);
     deleteProduct(conexion,id,(err) => {
       if (err) {
           console.error(err);

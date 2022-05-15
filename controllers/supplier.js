@@ -3,10 +3,9 @@ const conexion = require("../database/database");
 const { getSupplier, createSupplier, updateSupplier, deleteSupplier } = require("../models/supplierModel");
 
 const getSuppliers = (req, res) => {
-  const { uid } = req.body;
+  const { uid } = req;
   getSupplier(conexion, uid, (err, suppliers) => {
     if (err) { console.log(err); return res.status(401).json({ ok: true, msg: 'Error get Suppliers' }) } else {
-      console.log(suppliers);
       res.status(200).json({ ok: true, suppliers });
     }
   })
@@ -14,7 +13,8 @@ const getSuppliers = (req, res) => {
 
 
 const createSuppliers = (req, res) => {
-  const { uid, name, nit, address } = req.body;
+  const {uid} = req;
+  const {name, nit, address } = req.body;
   console.log(uid, name, nit, address);
 
   createSupplier(conexion, uid, name, nit, address, (err) => {
@@ -48,7 +48,6 @@ const updateSuppliers = (req, res) => {
 
 const deleteSuppliers = (req, res) => {
   const { id } = req.params;
-  console.log(id);
   deleteSupplier(conexion, id, (err) => {
     if (err) {
       console.error(err);

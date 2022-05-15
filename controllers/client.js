@@ -3,10 +3,9 @@ const conexion = require("../database/database");
 const { getClient, deleteClient, createClient, updateClient } = require("../models/clientModel");
 
 const getClients = (req, res) => {
-  const { uid } = req.body;
+  const { uid } = req;
   getClient(conexion, uid, (err, clients) => {
     if (err) { console.log(err); return res.status(401).json({ ok: true, msg: 'Error get Clients' }) } else {
-      console.log(clients);
       res.status(200).json({ ok: true, clients });
     }
   })
@@ -14,9 +13,8 @@ const getClients = (req, res) => {
 
 
 const creatClients = (req, res) => {
-  const { uid, name, lastName, email } = req.body;
-  console.log(name, lastName, email);
-
+  const {uid} = req;
+  const {name, lastName, email } = req.body;
   createClient(conexion, uid, name, lastName, email, (err) => {
     if (err) {
       console.error(err);
@@ -48,7 +46,6 @@ const updateClients = (req, res) => {
 
 const deleteClients = (req, res) => {
   const { id } = req.params;
-  console.log(id);
   deleteClient(conexion, id, (err) => {
     if (err) {
       console.error(err);

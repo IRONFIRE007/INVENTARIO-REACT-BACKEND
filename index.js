@@ -27,6 +27,7 @@ app.use('/api/product', require('./routes/product'));
 app.use('/api/sale', require('./routes/sales'));
 app.use('/api/facture', require('./routes/facture'));
 app.use('/api/return', require('./routes/returns'));
+app.use('/api/info', require('./routes/information'));
 
 app.listen(process.env.PORT || 3000, () => {
     console.log('listening on port ' + process.env.PORT);

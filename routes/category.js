@@ -1,21 +1,21 @@
-const {Router} = require('express');
+const { Router } = require('express');
 const router = Router();
-const  {check} = require('express-validator');
-const {validator} = require('../middlewares/validator');
- 
+const { check } = require('express-validator');
+const { validator } = require('../middlewares/validator');
+
 
 //Controllers
 const { validateJWT } = require('../middlewares/validate-jwt');
-const { getCategories,createCategories, updateCategories, deletedCategories } = require('../controllers/category');
+const { getCategories, createCategories, updateCategories, deletedCategories } = require('../controllers/category');
 
 
 //Routes 
+router.use(validateJWT);
 
-
-router.post('/get',getCategories);
-router.post('/new',createCategories);
-router.put('/update/:id',updateCategories);
-router.delete('/delete/:id',deletedCategories);
+router.get('/get', getCategories);
+router.post('/new', createCategories);
+router.put('/update/:id', updateCategories);
+router.delete('/delete/:id', deletedCategories);
 
 // router.post('/new',[
 //     //Middlewares
